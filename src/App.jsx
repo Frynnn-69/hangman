@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import wordsData from './data/wordsWithHints.json';
 import { HangmanDrawingV2 } from './components/HangmanDrawingV2';
 // import { HangmanDrawing } from './components/HangmanDrawing';
@@ -16,6 +16,7 @@ function App() {
   // Generate initial data once
   const [gameData, setGameData] = useState(() => getRandomWordWithHint());
   const [guessedLetters, setGuessedLetters] = useState([]);
+  const mobileInputRef = useRef(null);
 
   const wordToGuess = gameData.word;
   const currentHint = gameData.hint;
@@ -54,7 +55,15 @@ function App() {
   };
 
   return (
-    <div className="w-full min-h-screen paper-texture flex flex-col items-center py-8 text-gray-800 font-sans overflow-hidden">
+    <div 
+      className="w-full min-h-screen paper-texture flex flex-col items-center py-8 text-gray-800 font-sans overflow-hidden"
+      onClick={() => {
+        // Focus mobile input when clicking anywhere on mobile
+        if (window.innerWidth < 768) {
+          mobileInputRef.current?.focus();
+        }
+      }}
+    >
       
       {/* HEADER */}
       <h1 className="text-4xl md:text-5xl font-bold transform -rotate-2 font-hand mt-8 mb-4 text-center leading-tight" style={{ fontSize: window.innerWidth >= 768 ? '3rem' : '2.25rem' }}>
@@ -101,20 +110,32 @@ function App() {
 
         {/* Hidden input for mobile native keyboard */}
         <input
+          ref={mobileInputRef}
           type="text"
+          inputMode="text"
           maxLength={1}
           autoComplete="off"
           autoCapitalize="characters"
-          className="md:hidden absolute opacity-0 pointer-events-none"
-          style={{ position: 'absolute', left: '-9999px' }}
+          className="md:hidden fixed opacity-0 pointer-events-auto"
+          style={{ position: 'fixed', top: '50%', left: '50%', width: '1px', height: '1px' }}
           onKeyDown={(e) => {
             if (e.key.match(/^[a-z]$/i)) {
               e.preventDefault();
               addGuessedLetter(e.key.toUpperCase());
+              // Clear input for next letter
+              e.target.value = '';
             }
           }}
-          autoFocus
+          onBlur={() => {
+            // Refocus when keyboard closes (optional behavior)
+            setTimeout(() => mobileInputRef.current?.focus(), 100);
+          }}
         />
+
+        {/* Mobile tap instruction */}
+        <div className="md:hidden text-center mb-4">
+          <p className="text-lg font-hand opacity-60">👆 Tap anywhere to type</p>
+        </div>
 
         {/* Visual keyboard - hidden on mobile */}
         <div className="hidden md:flex w-full justify-center">
