@@ -99,12 +99,32 @@ function App() {
            ↺ RESET GAME
         </button>
 
-        <Keyboard 
-          activeLetters={guessedLetters.filter(letter => wordToGuess.includes(letter))}
-          inactiveLetters={guessedLetters}
-          addGuessedLetter={addGuessedLetter}
-          disabled={isWinner || isLoser}
+        {/* Hidden input for mobile native keyboard */}
+        <input
+          type="text"
+          maxLength={1}
+          autoComplete="off"
+          autoCapitalize="characters"
+          className="md:hidden absolute opacity-0 pointer-events-none"
+          style={{ position: 'absolute', left: '-9999px' }}
+          onKeyDown={(e) => {
+            if (e.key.match(/^[a-z]$/i)) {
+              e.preventDefault();
+              addGuessedLetter(e.key.toUpperCase());
+            }
+          }}
+          autoFocus
         />
+
+        {/* Visual keyboard - hidden on mobile */}
+        <div className="hidden md:flex w-full justify-center">
+          <Keyboard 
+            activeLetters={guessedLetters.filter(letter => wordToGuess.includes(letter))}
+            inactiveLetters={guessedLetters}
+            addGuessedLetter={addGuessedLetter}
+            disabled={isWinner || isLoser}
+          />
+        </div>
       </div>
 
 
