@@ -113,29 +113,39 @@ function App() {
           ref={mobileInputRef}
           type="text"
           inputMode="text"
-          maxLength={1}
+          value=""
           autoComplete="off"
           autoCapitalize="characters"
           className="md:hidden fixed opacity-0 pointer-events-auto"
           style={{ position: 'fixed', top: '50%', left: '50%', width: '1px', height: '1px' }}
+          onChange={(e) => {
+            // Android compatibility - use onChange instead of onKeyDown
+            const value = e.target.value.toUpperCase();
+            if (value.match(/^[A-Z]$/)) {
+              addGuessedLetter(value);
+            }
+            e.target.value = ''; // Clear immediately
+          }}
           onKeyDown={(e) => {
+            // iOS compatibility - keep onKeyDown for better UX
             if (e.key.match(/^[a-z]$/i)) {
               e.preventDefault();
-              addGuessedLetter(e.key.toUpperCase());
-              // Clear input for next letter
-              e.target.value = '';
             }
           }}
           onBlur={() => {
-            // Refocus when keyboard closes (optional behavior)
-            setTimeout(() => mobileInputRef.current?.focus(), 100);
+            // Refocus when keyboard closes
+            if (!isWinner && !isLoser) {
+              setTimeout(() => mobileInputRef.current?.focus(), 100);
+            }
           }}
         />
 
-        {/* Mobile tap instruction */}
-        <div className="md:hidden text-center mb-4">
-          <p className="text-lg font-hand opacity-60">👆 Tap anywhere to type</p>
-        </div>
+        {/* Mobile tap instruction - only show during active game */}
+        {!isWinner && !isLoser && (
+          <div className="md:hidden text-center mb-4">
+            <p className="text-lg font-hand opacity-60">👆 Tap anywhere to type</p>
+          </div>
+        )}
 
         {/* Visual keyboard - hidden on mobile */}
         <div className="hidden md:flex w-full justify-center">
