@@ -307,12 +307,15 @@ _Game over screen revealing the answer in red_
 ### Mobile Version
 
 ![Mobile Gameplay](https://i.postimg.cc/3JBPQ3Cn/mobile-ver.png)
+
 _Optimized mobile layout with native keyboard support_
 
 ![Mobile Win State](https://i.postimg.cc/KvNdhmrL/mobile-ver-win.png)
+
 _Responsive win overlay on mobile devices_
 
 ![Mobile Lose State](https://i.postimg.cc/WbnQcs6Z/mobile-ver-lose.png)
+
 _Mobile game over screen with full word reveal_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -323,8 +326,9 @@ _Mobile game over screen with full word reveal_
 
 **Developed by:** Kelompok 3  
 **Course:** Computer Graphics  
-**Lecturer:** Dwi Widiastuti
-**Institution:** Gunadarma University
+**Lecturer:** Dwi Widiastuti   
+**Institution:** Gunadarma University  
+
 
 **Project Links:**
 
