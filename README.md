@@ -295,24 +295,24 @@ All state lives in `App.jsx` and flows down to children via props:
 
 ### Desktop Version
 
-![Desktop Gameplay](public/dokumentasi/desktop-ver.png)
+![Desktop Gameplay](https://i.postimg.cc/kXckP7Fy/desktop-ver.png)
 _Main game interface with hand-drawn aesthetic and paper texture_
 
-![Desktop Win State](public/dokumentasi/desktop-ver-win.png)
+![Desktop Win State](https://i.postimg.cc/3J7Pqkpw/desktop-ver-win.png)
 _Victory screen with animated celebration message_
 
-![Desktop Lose State](public/dokumentasi/desktop-ver-lose.png)
+![Desktop Lose State](https://i.postimg.cc/7YVprqMV/desktop-ver-lose.png)
 _Game over screen revealing the answer in red_
 
 ### Mobile Version
 
-![Mobile Gameplay](public/dokumentasi/mobile-ver.png)
+![Mobile Gameplay](https://i.postimg.cc/3JBPQ3Cn/mobile-ver.png)
 _Optimized mobile layout with native keyboard support_
 
-![Mobile Win State](public/dokumentasi/mobile-ver-win.png)
+![Mobile Win State](https://i.postimg.cc/KvNdhmrL/mobile-ver-win.png)
 _Responsive win overlay on mobile devices_
 
-![Mobile Lose State](public/dokumentasi/mobile-ver-lose.png)
+![Mobile Lose State](https://i.postimg.cc/WbnQcs6Z/mobile-ver-lose.png)
 _Mobile game over screen with full word reveal_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
